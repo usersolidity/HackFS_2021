@@ -1,4 +1,6 @@
-pragma solidity ^0.5.12;
+//SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0;
+
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
 import "./ERC721Holder.sol";
@@ -26,7 +28,7 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
     //Structure that stores token information for each Asset
     struct Asset {
         uint256 assetId;
-        uint256 assetValue;
+        string metadataURI;
         bool currentlyBorrowed;  
     }
     
@@ -44,41 +46,41 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
     mapping (address => mapping (address => bool)) public  _operatorApprovals;
 
     
-    event NewAssetCreation(address owner, uint256 newAssetId, uint256 assetValue, bool currentlyBorrowed);
+    event NewAssetCreation(address owner, uint256 newAssetId, string metadataURI, bool currentlyBorrowed);
 
-    function balanceOf(address owner) external view returns (uint256){
+    function balanceOf(address owner) external override view returns (uint256){
         return AssetOwnershipCount[owner];
     }
 
     /*
      * @dev Creates new Asset Token.
      *
-     * assetValue is the value of real world Asset
+     * metadataURI is the value of real world Asset
      */ 
-    function createAsset(uint256 assetValue) public returns (uint256){
+    function createAsset(string memory metadataURI) public returns (uint256){
 
         //Create new Asset, send it to msg.sender
-        return _createAsset(assetValue, false, msg.sender);
+        return _createAsset(metadataURI, false, msg.sender);
     }
 
     /*
      * @dev Returns the total number of tokens in circulation.
      */
-    function totalSupply() external view returns (uint256){
+    function totalSupply() external view override returns (uint256){
         return itemsForOffer.length;
     }
 
     /*
      * @dev Returns the name of the token.
      */
-    function name() external view returns (string memory){
+    function name() external view override returns (string memory){
         return dAppName;
     }
 
     /*
      * @dev Returns the symbol of the token.
      */
-    function symbol() external view returns (string memory){
+    function symbol() external view override returns (string memory){
         return globalTokenSymbol;
     }
 
@@ -89,7 +91,7 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
      *
      * - `tokenId` must exist.
      */
-    function ownerOf(uint256 _tokenId) external view returns (address){
+    function ownerOf(uint256 _tokenId) external view override returns (address){
         return AssetIndextoOwner[_tokenId];
     }
     
@@ -98,13 +100,13 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
     function getAssetInfo(uint256 _index) external view 
     returns (
         uint256 assetId, 
-        uint256 assetValue, 
+        string memory metadataURI, 
         bool currentlyBorrowed)
             {
                 Asset storage AssetInfo = itemsForOffer[_index];
 
                 assetId = AssetInfo.assetId;
-                assetValue = uint256(AssetInfo.assetValue);
+                metadataURI = string(AssetInfo.metadataURI);
                 currentlyBorrowed = bool(AssetInfo.currentlyBorrowed);
             }
 
@@ -115,7 +117,7 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
      * - `tokenId` token must be owned by `msg.sender`.
      * Emits a {Transfer} event.
      */
-    function transfer(address to, uint256 tokenId) external{
+    function transfer(address to, uint256 tokenId) override external{
         require(to != address(0x0),'Address Cannot be NULL');
         require(AssetIndextoOwner[tokenId] == msg.sender, 'Sender Must be Owner');
     
@@ -138,11 +140,11 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
 
 
 // CREATE NEW Asset FUNCTION 
-    function _createAsset(uint256 _assetValue, bool _currentlyBorrowed, address _owner) internal returns(uint256){
+    function _createAsset(string memory _metadataURI, bool _currentlyBorrowed, address _owner) internal returns(uint256){
         
         Asset memory _Asset = Asset({
             assetId: itemsForOffer.length,
-            assetValue: uint256(_assetValue),
+            metadataURI: string(_metadataURI),
             currentlyBorrowed: bool(_currentlyBorrowed)
         });
 
@@ -152,7 +154,7 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
 
         _transfer(address(0x0), _owner, newAssetId);
 
-        emit NewAssetCreation(_owner, newAssetId, _assetValue, _currentlyBorrowed);
+        emit NewAssetCreation(_owner, newAssetId, _metadataURI, _currentlyBorrowed);
 
         return newAssetId;
     }
@@ -162,18 +164,18 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
     * Uses function _checkERC721Support to check for receivability
     * Ensures the address can handle token but not that it is correct address
     */
-    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) public{
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) override public{
         require( _checkTransferParameters(_from, _to, _tokenId) , "Message.Sender must be Token Owner, or Approved by Owner");
         _safeTransfer(_from, _to, _tokenId, data);
     
     }
 
-    function safeTransferFrom(address _from, address _to, uint256 _tokenId) external{
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) override external{
         safeTransferFrom(_from, _to, _tokenId, "");
     }
 
 
-    function transferFrom(address _from, address _to, uint256 _tokenId) external{
+    function transferFrom(address _from, address _to, uint256 _tokenId) override external{
         require( _checkTransferParameters(_from, _to, _tokenId) , "Message.Sender must be Token Owner, or Approved by Owner");
         _transfer(_from, _to, _tokenId);
     }
@@ -243,7 +245,7 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
     * Not used in this contract as design is structured different
     *
      */
-    function approve(address _approved, uint256 _tokenId) external{
+    function approve(address _approved, uint256 _tokenId) override external{
         require(
             AssetIndextoOwner[_tokenId] == msg.sender || 
             AssetIndexToApproved[_tokenId] == msg.sender || 
@@ -259,7 +261,7 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
         emit Approval(AssetIndextoOwner[_tokenId], _approved, _tokenId);
     }
 
-    function setApprovalForAll(address _operator, bool _approved) external{
+    function setApprovalForAll(address _operator, bool _approved) override external{
         require(_approved = true || false, "Must Enter True or False");
         require(_operator != msg.sender, "Cannot approve yourself");
         require(_operator != address (0x0), "Cannot Approve a Zero Address");
@@ -273,13 +275,13 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
         emit ApprovalForAll(msg.sender, _operator, _approved);
     }
 
-    function getApproved(uint256 _tokenId) external view returns (address){
+    function getApproved(uint256 _tokenId) external override view returns (address){
         require((_tokenId < itemsForOffer.length), 'Must be a valid Asset');
 
         return (AssetIndexToApproved[_tokenId]);
     }
 
-    function isApprovedForAll(address _owner, address _operator) external view returns (bool){
+    function isApprovedForAll(address _owner, address _operator) external override view returns (bool){
         return _operatorApprovals[_owner][_operator];
     }
 }    

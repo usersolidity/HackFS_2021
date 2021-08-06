@@ -1,4 +1,5 @@
-pragma solidity ^0.5.12;
+//SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0;
 
 import "./AssetContract.sol";
 import "./IP2PMarketplace.sol";
@@ -44,14 +45,14 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
         owner = msg.sender;
     }
     
-    function setAssetContract(address _AssetContractAddress) external onlyOwner{
+    function setAssetContract(address _AssetContractAddress) external override onlyOwner{
         _AssetContract = AssetContract(_AssetContractAddress);
     }
 
     /**
     * Get the details about a offer for _tokenId. Throws an error if there is no activeOffering offer for _tokenId.
      */
-    function getOffer(uint256 _tokenId) external view returns ( 
+    function getOffer(uint256 _tokenId) external view override  returns ( 
         address lender, 
         uint256 dollarsPerPeriod, 
         uint256 durationOfLend, 
@@ -72,7 +73,7 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     * Get all tokenId's that are currently available for lend. 
     * Returns an empty array if none exist.
      */
-    function getAllTokenOnOffer() external view  returns(uint256[] memory listOfOffers){
+    function getAllTokenOnOffer() external view override returns(uint256[] memory listOfOffers) {
         uint256 _length = offers.length;
 
         uint256[] memory _offers;
@@ -97,11 +98,11 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     * Requirement: There can only be one activeOffering offer for a token at a time.
     * Requirement: Transfer token before creating offer to prevent active offer without token transfer
      */
-    function setOffer(uint256 _durationOfLend, uint256 _dollarsPerPeriod, uint256 _tokenId) external{
+    function setOffer(uint256 _durationOfLend, uint256 _dollarsPerPeriod, uint256 _tokenId) external override {
         require(_AssetContract.ownerOf(_tokenId) == msg.sender, "Only the onwner can list a Asset for Sale");
         require(tokenIdToOffer[_tokenId].activeOffering != true, "Asset already has an activeOffering offer");
        
-        tokenIdToOffer[_tokenId].lender = msg.sender;
+        tokenIdToOffer[_tokenId].lender = payable(msg.sender);
         tokenIdToOffer[_tokenId].durationOfLend = _durationOfLend;
         tokenIdToOffer[_tokenId].dollarsPerPeriod = _dollarsPerPeriod;
         tokenIdToOffer[_tokenId].tokenId = _tokenId;
@@ -125,7 +126,7 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     * Emits the MarketTransaction event with txType "Asset Removed From Lending"
     * Requirement: Only the lender of _tokenId can remove an offer.
      */
-    function removeOffer(uint256 _tokenId) external{
+    function removeOffer(uint256 _tokenId) external override {
         //require(tokenIdToOffer[_tokenId].lender == msg.sender, "Only the Owner can Remove an Asset");
         require(tokenIdToOffer[_tokenId].activelyBorrowed == false, "Asset is currently borrowed");
         
@@ -145,14 +146,14 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     * Requirement: The msg.value must be greater then dollarsPerPeriod of _tokenId to account for price and fees
     * Requirement: There must be an activeOffering offer for _tokenId
      */
-    function lendAsset(uint256 _tokenId) external payable{
+    function lendAsset(uint256 _tokenId) external payable override {
         require(tokenIdToOffer[_tokenId].activeOffering == true, "Asset is not available");
         require(msg.value > (tokenIdToOffer[_tokenId].dollarsPerPeriod), "Message value too low");
         require(tokenIdToOffer[_tokenId].activelyBorrowed == false, "Asset is currently Borrowed");
 
         uint256 borrowId = BorrowedAssets.length;
 
-        tokensBorrowed[borrowId].Borrower = msg.sender;
+        tokensBorrowed[borrowId].Borrower = payable(msg.sender);
 
         tokensBorrowed[borrowId].PricePaid = msg.value;
         tokensBorrowed[borrowId].Active = true;
@@ -169,7 +170,7 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     * No funds sent as payment was already sent
     * Require original lender to call this function as they own token
      */
-    function returnAsset(uint256 _tokenId) external {
+    function returnAsset(uint256 _tokenId) external override {
         //require(tokensBorrowed[_tokenId].Borrower == msg.sender, "Only the Borrower can return an offer");
         require(tokenIdToOffer[_tokenId].activelyBorrowed == true, "Asset is not currently Borrowed");
 
@@ -188,8 +189,8 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
         emit MarketTransaction("Asset Returned", tokenIdToOffer[_tokenId].lender, _tokenId);
     }
 
-    function Withdraw(uint256 amountToTransfer) external onlyOwner{
-        msg.sender.transfer(amountToTransfer);
+    function Withdraw(uint256 amountToTransfer) external onlyOwner override {
+        payable(msg.sender).transfer(amountToTransfer);
     }
     
     function contractBalance() external view returns (uint256){
