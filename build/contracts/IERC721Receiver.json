@@ -36,7 +36,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/Kaiju/Desktop/Courses/HackFS/contracts/IERC721Receiver.sol\":\"IERC721Receiver\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/Kaiju/Desktop/Courses/HackFS/contracts/IERC721Receiver.sol\":{\"keccak256\":\"0x00795d4d268b8c58930bd97a68c89db3fcb40d9a4e8ac47ffba70c119979a50f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2792001967d6eef6682cfe4737e627f062cda657bb377117e8bac6fcc5ac4363\",\"dweb:/ipfs/QmQ2K2BKTCAQzzsE1JhyPurcqY82QRDJLhp2K2RLZtE7LK\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IERC721Receiver.sol\":\"IERC721Receiver\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IERC721Receiver.sol\":{\"keccak256\":\"0x00795d4d268b8c58930bd97a68c89db3fcb40d9a4e8ac47ffba70c119979a50f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2792001967d6eef6682cfe4737e627f062cda657bb377117e8bac6fcc5ac4363\",\"dweb:/ipfs/QmQ2K2BKTCAQzzsE1JhyPurcqY82QRDJLhp2K2RLZtE7LK\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -45,9 +45,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "//SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface IERC721Receiver {\n    function onERC721Received(address operator, address from, uint tokenId, bytes calldata data) external returns(bytes4);\n}",
-  "sourcePath": "/Users/Kaiju/Desktop/Courses/HackFS/contracts/IERC721Receiver.sol",
+  "sourcePath": "/Users/ray/Desktop/HackFS_2021/contracts/IERC721Receiver.sol",
   "ast": {
-    "absolutePath": "/Users/Kaiju/Desktop/Courses/HackFS/contracts/IERC721Receiver.sol",
+    "absolutePath": "project:/contracts/IERC721Receiver.sol",
     "exportedSymbols": {
       "IERC721Receiver": [
         948
@@ -249,7 +249,7 @@
     "src": "31:177:3"
   },
   "legacyAST": {
-    "absolutePath": "/Users/Kaiju/Desktop/Courses/HackFS/contracts/IERC721Receiver.sol",
+    "absolutePath": "project:/contracts/IERC721Receiver.sol",
     "exportedSymbols": {
       "IERC721Receiver": [
         948
@@ -455,8 +455,8 @@
     "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.1",
-  "updatedAt": "2021-08-05T19:27:51.120Z",
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-08-09T20:51:19.791Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

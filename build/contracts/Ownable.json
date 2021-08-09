@@ -20,9 +20,9 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/Kaiju/Desktop/Courses/HackFS/contracts/Ownable.sol\":\"Ownable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/Kaiju/Desktop/Courses/HackFS/contracts/Ownable.sol\":{\"keccak256\":\"0x142f96c10204db557d42c329ba5fb64924a5c045ba0fecc65623ac5934ab34b5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c4425bee640ccd44db0ccf96e1599e888572b486ded385bd21818c91fb26081c\",\"dweb:/ipfs/QmNbbuuhv5WiryDFna7bRyzbLVGeo4r6ZkGJS82u6tkJg5\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060f78061005f6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b60336047565b604051603e91906078565b60405180910390f35b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6072816091565b82525050565b6000602082019050608b6000830184606b565b92915050565b6000609a8260a1565b9050919050565b600073ffffffffffffffffffffffffffffffffffffffff8216905091905056fea26469706673582212201831a493dcb7f0b283925f9a87169b2930d016e31329b838b464afe10f05091b64736f6c63430008000033",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b60336047565b604051603e91906078565b60405180910390f35b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6072816091565b82525050565b6000602082019050608b6000830184606b565b92915050565b6000609a8260a1565b9050919050565b600073ffffffffffffffffffffffffffffffffffffffff8216905091905056fea26469706673582212201831a493dcb7f0b283925f9a87169b2930d016e31329b838b464afe10f05091b64736f6c63430008000033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Ownable.sol\":\"Ownable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Ownable.sol\":{\"keccak256\":\"0x142f96c10204db557d42c329ba5fb64924a5c045ba0fecc65623ac5934ab34b5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c4425bee640ccd44db0ccf96e1599e888572b486ded385bd21818c91fb26081c\",\"dweb:/ipfs/QmNbbuuhv5WiryDFna7bRyzbLVGeo4r6ZkGJS82u6tkJg5\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060f78061005f6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b60336047565b604051603e91906078565b60405180910390f35b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6072816091565b82525050565b6000602082019050608b6000830184606b565b92915050565b6000609a8260a1565b9050919050565b600073ffffffffffffffffffffffffffffffffffffffff8216905091905056fea2646970667358221220dbdebd22c396af2c2f35778e3170250cbdeba8e91206c2d33b3cb6931f06d41164736f6c63430008000033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80638da5cb5b14602d575b600080fd5b60336047565b604051603e91906078565b60405180910390f35b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6072816091565b82525050565b6000602082019050608b6000830184606b565b92915050565b6000609a8260a1565b9050919050565b600073ffffffffffffffffffffffffffffffffffffffff8216905091905056fea2646970667358221220dbdebd22c396af2c2f35778e3170250cbdeba8e91206c2d33b3cb6931f06d41164736f6c63430008000033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [
@@ -328,9 +328,9 @@
   "sourceMap": "55:209:6:-:0;;;207:55;;;;;;;;;;245:10;237:5;;:18;;;;;;;;;;;;;;;;;;55:209;;;;;;",
   "deployedSourceMap": "55:209:6:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;77:20;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;:::o;7:118:9:-;94:24;112:5;94:24;:::i;:::-;89:3;82:37;72:53;;:::o;131:222::-;;262:2;251:9;247:18;239:26;;275:71;343:1;332:9;328:17;319:6;275:71;:::i;:::-;229:124;;;;:::o;359:96::-;;425:24;443:5;425:24;:::i;:::-;414:35;;404:51;;;:::o;461:126::-;;538:42;531:5;527:54;516:65;;506:81;;;:::o",
   "source": "//SPDX-License-Identifier: MIT\npragma solidity 0.8.0;\n\ncontract Ownable{\n    address public owner;\n\n    modifier onlyOwner(){\n        require(msg.sender == owner);\n        _; //Continue execution\n    }\n\n    constructor() public{\n        owner = msg.sender;\n    }\n}\n",
-  "sourcePath": "/Users/Kaiju/Desktop/Courses/HackFS/contracts/Ownable.sol",
+  "sourcePath": "/Users/ray/Desktop/HackFS_2021/contracts/Ownable.sol",
   "ast": {
-    "absolutePath": "/Users/Kaiju/Desktop/Courses/HackFS/contracts/Ownable.sol",
+    "absolutePath": "project:/contracts/Ownable.sol",
     "exportedSymbols": {
       "Ownable": [
         1081
@@ -614,7 +614,7 @@
     "src": "31:234:6"
   },
   "legacyAST": {
-    "absolutePath": "/Users/Kaiju/Desktop/Courses/HackFS/contracts/Ownable.sol",
+    "absolutePath": "project:/contracts/Ownable.sol",
     "exportedSymbols": {
       "Ownable": [
         1081
@@ -902,8 +902,8 @@
     "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.1",
-  "updatedAt": "2021-08-05T19:27:51.123Z",
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-08-09T20:51:19.802Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
