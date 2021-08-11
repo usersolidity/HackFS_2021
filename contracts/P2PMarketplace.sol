@@ -6,8 +6,6 @@ import "./IP2PMarketplace.sol";
 import "./Ownable.sol";
 import "./SafeMath.sol";
 
-
-
 contract P2PMarketplace is Ownable, IP2PMarketplace{
     //Allows for function calls from the Asset Contract
     AssetContract private _AssetContract;
