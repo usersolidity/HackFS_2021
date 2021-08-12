@@ -13,8 +13,7 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     //Mapping that stores the NFT information for an Asset
     struct Offer {
         address payable lender;
-        uint256 durationOfLend;
-        uint256 dollarsPerPeriod;
+        uint256 GWEIPerPeriod;
         uint256 tokenId;
         bool activeOffering;
         bool activelyBorrowed;
@@ -39,7 +38,7 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     * Set the current AssetContract address and initialize the instance of AssetContract.
     * Requirement: Only the contract owner can call.
      */
-    constructor() public{
+    constructor() {
         owner = msg.sender;
     }
     
@@ -52,16 +51,14 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
      */
     function getOffer(uint256 _tokenId) external view override  returns ( 
         address lender, 
-        uint256 dollarsPerPeriod, 
-        uint256 durationOfLend, 
+        uint256 GWEIPerPeriod, 
         uint256 tokenId, 
         bool activeOffering,
         bool activelyBorrowed){
         require(tokenIdToOffer[_tokenId].activeOffering, "No active offering for that Asset");
             return (
                 tokenIdToOffer[_tokenId].lender,
-                tokenIdToOffer[_tokenId].dollarsPerPeriod,
-                tokenIdToOffer[_tokenId].durationOfLend,
+                tokenIdToOffer[_tokenId].GWEIPerPeriod,
                 tokenIdToOffer[_tokenId].tokenId,
                 tokenIdToOffer[_tokenId].activeOffering,
                 tokenIdToOffer[_tokenId].activelyBorrowed);
@@ -88,21 +85,20 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     }
 
     /*
-    * Creates a new offer for _tokenId for the dollarsPerPeriod _dollarsPerPeriod.
+    * Creates a new offer for _tokenId for the GWEIPerPeriod _GWEIPerPeriod.
     * Transfers control of Asset to the Smart Contract
     * Emits the MarketTransaction event with txType "Asset Available for Lending"
-    * If offer had been created in the past sets it back to active and updates duration and dollars
+    * If offer had been created in the past sets it back to active and updates duration and GWEI
     * Requirement: Only the owner of _tokenId can create an offer.
     * Requirement: There can only be one activeOffering offer for a token at a time.
     * Requirement: Transfer token before creating offer to prevent active offer without token transfer
      */
-    function setOffer(uint256 _durationOfLend, uint256 _dollarsPerPeriod, uint256 _tokenId) external override {
+    function setOffer( uint256 _GWEIPerPeriod, uint256 _tokenId) external override {
         require(_AssetContract.ownerOf(_tokenId) == msg.sender, "Only the onwner can list a Asset for Sale");
         require(tokenIdToOffer[_tokenId].activeOffering != true, "Asset already has an activeOffering offer");
        
         tokenIdToOffer[_tokenId].lender = payable(msg.sender);
-        tokenIdToOffer[_tokenId].durationOfLend = _durationOfLend;
-        tokenIdToOffer[_tokenId].dollarsPerPeriod = _dollarsPerPeriod;
+        tokenIdToOffer[_tokenId].GWEIPerPeriod = _GWEIPerPeriod;
         tokenIdToOffer[_tokenId].tokenId = _tokenId;
         tokenIdToOffer[_tokenId].activeOffering = false;
         tokenIdToOffer[_tokenId].activelyBorrowed = false;
@@ -112,8 +108,7 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
         _AssetContract.safeTransferFrom(msg.sender, address(_AssetContract), _tokenId);
         
         tokenIdToOffer[_tokenId].activeOffering = true;
-        tokenIdToOffer[_tokenId].durationOfLend = _durationOfLend;
-        tokenIdToOffer[_tokenId].dollarsPerPeriod = _dollarsPerPeriod;
+        tokenIdToOffer[_tokenId].GWEIPerPeriod = _GWEIPerPeriod;
        
        emit MarketTransaction("Asset Available for Lending", msg.sender, _tokenId);
     } 
@@ -141,12 +136,12 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
     * Sends the price to the contract.
     * Emits the MarketTransaction event with txType "Lent".
     * FEE MUST BE BUILT INTO THE FRONT END CODE
-    * Requirement: The msg.value must be greater then dollarsPerPeriod of _tokenId to account for price and fees
+    * Requirement: The msg.value must be greater then GWEIPerPeriod of _tokenId to account for price and fees
     * Requirement: There must be an activeOffering offer for _tokenId
      */
     function lendAsset(uint256 _tokenId) external payable override {
         require(tokenIdToOffer[_tokenId].activeOffering == true, "Asset is not available");
-        require(msg.value > (tokenIdToOffer[_tokenId].dollarsPerPeriod), "Message value too low");
+        require(msg.value > (tokenIdToOffer[_tokenId].GWEIPerPeriod), "Message value too low");
         require(tokenIdToOffer[_tokenId].activelyBorrowed == false, "Asset is currently Borrowed");
 
         uint256 borrowId = BorrowedAssets.length;
@@ -175,10 +170,10 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
         tokenIdToOffer[_tokenId].activelyBorrowed = false;
         tokensBorrowed[_tokenId].Active = false;
         
-        uint256 lenderProfit = SafeMath.mul( (tokenIdToOffer[_tokenId].dollarsPerPeriod), SafeMath.div(99,100) );
+        uint256 lenderProfit = SafeMath.mul( (tokenIdToOffer[_tokenId].GWEIPerPeriod), SafeMath.div(99,100) );
         uint256 borrowerCollateral = 
-                (tokensBorrowed[_tokenId].PricePaid - tokenIdToOffer[_tokenId].dollarsPerPeriod) -
-                (SafeMath.mul( (tokenIdToOffer[_tokenId].dollarsPerPeriod) ,  SafeMath.div(99,100) ) );
+                (tokensBorrowed[_tokenId].PricePaid - tokenIdToOffer[_tokenId].GWEIPerPeriod) -
+                (SafeMath.mul( (tokenIdToOffer[_tokenId].GWEIPerPeriod) ,  SafeMath.div(99,100) ) );
 
         tokenIdToOffer[_tokenId].lender.transfer(lenderProfit);
         tokensBorrowed[_tokenId].Borrower.transfer(borrowerCollateral);

@@ -9,7 +9,7 @@ contract Ownable{
         _; //Continue execution
     }
 
-    constructor() public{
+    constructor() {
         owner = msg.sender;
     }
 }

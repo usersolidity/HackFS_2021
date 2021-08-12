@@ -21,7 +21,7 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
         return (_interfaceId == _INTERFACE_ID_ERC165 || _interfaceId == _INTERFACE_ID_ERC721);
     }
 
-    constructor() public{
+    constructor() {
         owner = msg.sender;
     }
     
@@ -73,14 +73,14 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
     /*
      * @dev Returns the name of the token.
      */
-    function name() external view override returns (string memory){
+    function name() external pure override returns (string memory){
         return dAppName;
     }
 
     /*
      * @dev Returns the symbol of the token.
      */
-    function symbol() external view override returns (string memory){
+    function symbol() external pure override returns (string memory){
         return globalTokenSymbol;
     }
 
@@ -127,12 +127,9 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
 
     // Internal function which will be used by transfer to swap token ownership
     function _transfer(address _from, address _to, uint256 _tokenId) internal {
-        AssetOwnershipCount[_to] ++;
-        if (_to == address(this)){
-            AssetIndexToApproved[_tokenId];
-        }
-        
-        AssetOwnershipCount[_from] --;
+
+        AssetOwnershipCount[_from] -= 1;
+        AssetOwnershipCount[_to] += 1;
         AssetIndextoOwner[_tokenId] = _to;
 
         emit Transfer(_from, _to, _tokenId);
@@ -152,7 +149,8 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
 
         uint256 newAssetId = (itemsForOffer.length)-1;
 
-        _transfer(address(0x0), _owner, newAssetId);
+        AssetIndextoOwner[newAssetId] = _owner;
+        AssetOwnershipCount[_owner] += 1;
 
         emit NewAssetCreation(_owner, newAssetId, _metadataURI, _currentlyBorrowed);
 
@@ -165,23 +163,24 @@ contract AssetContract is IERC721, Ownable, ERC721Holder{
     * Ensures the address can handle token but not that it is correct address
     */
     function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory data) override public{
-        require( _checkTransferParameters(_from, _to, _tokenId) , "Message.Sender must be Token Owner, or Approved by Owner");
+        require(_checkTransferParameters( _from,  _to, _tokenId), "Transfer must be from owner or approved by owner");
         _safeTransfer(_from, _to, _tokenId, data);
     
     }
 
     function safeTransferFrom(address _from, address _to, uint256 _tokenId) override external{
-        safeTransferFrom(_from, _to, _tokenId, "");
+       require(_checkTransferParameters( _from,  _to, _tokenId), "Transfer must be from owner or approved by owner");
+       safeTransferFrom(_from, _to, _tokenId, "");
     }
 
 
     function transferFrom(address _from, address _to, uint256 _tokenId) override external{
-        require( _checkTransferParameters(_from, _to, _tokenId) , "Message.Sender must be Token Owner, or Approved by Owner");
+        require(_checkTransferParameters( _from,  _to, _tokenId), "Transfer must be from owner or approved by owner");
         _transfer(_from, _to, _tokenId);
     }
 
     function _safeTransfer(address _from, address _to, uint256 _tokenId, bytes memory _data) internal {
-        require(_checkERC721Support(_from, _to, _tokenId, _data), "To Address Must be Capable of Receiving Token");
+        require(_checkTransferParameters( _from,  _to, _tokenId), "Transfer must be from owner or approved by owner");
         _transfer(_from, _to, _tokenId);
     }
 
