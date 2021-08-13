@@ -3,7 +3,7 @@
 const NFTStorage = require('nft.storage')
 const NFTSTORAGE_API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEJFNjAzNjYxMzk2OTg5Rjk5YUU4MURGNzRGY2NFRDQ4YUFGMkYyOGEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYyODE5MjE3ODUzMCwibmFtZSI6IkhhY2tGU18yMDIxIn0.8egYuYRc_nmWS-HyEbSYliB2ShACUq2TWEswzcnoOVI'
 const nftClient = new NFTStorage.NFTStorage({ token: NFTSTORAGE_API_TOKEN });
-const Web3 = require('@metamask/legacy-web3');
+const Web3 = require('web3');
 
 var web3 = new Web3(Web3.givenProvider);
 var AssetInstance;
