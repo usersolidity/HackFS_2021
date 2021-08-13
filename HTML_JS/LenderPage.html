@@ -8,20 +8,109 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
           integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
           crossorigin="anonymous"></script>
-        <script type="text/javascript" src="./web3.min.js"></script>
-        <script type="text/javascript" src="./abi.js"></script> <!--abi.js import-->
-        <script src="./nftStorage.js"></script> <!--main.js import-->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+          <script src="https://unpkg.com/@metamask/legacy-web3@latest/dist/metamask.web3.min.js"></script>
+        <script type="text/javascript" src="./abiAsset.js"></script> <!--abi.js import-->
+        <script type="text/javascript" src="./abiP2P.js"></script>
+        <script type="javascript" src="./nftStorage.js"></script> <!--nftstorage.js import-->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+          crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+          crossorigin="anonymous">
       </head>
     </head>
 
     <body>
-        <div>
-            <input class="text-center" type="text" id="name_input" placeholder="Asset Name" size="15">
-            <input class="text-center" type="text" id="description_input" placeholder="Asset Description" size="15">
-            <input type="text" id="img_input" src="#" size="15">
-            <button id="mint">MINT A NEW ASSET</button>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="LenderPage.html">Lend an Asset</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Borrower.html">Borrow an Asset</a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+      
+      <br>
+      <br>
+      <div class="text-center"><h1>Become A Lender</h1></div>
+      <div class="container">
+        <div class="row align-items-start">
+        <div class="col align-self-center text-center">
+          <h2>STEP ONE</h2> 
+          <p> Mint an Asset </p>
+        </div>
+        <div class="col align-self-center text-center">
+          <h2>STEP TWO</h2> 
+          <p> Approve Marketplace to Lend </p>
+        </div>
+        <div class="col align-self-center text-center">
+          <h2>STEP THREE</h2> 
+          <p> Set Offer for Asset </p>
+        </div>
+      </div>
+      
+      <br>
+
+        <div class="row align-items-start">
+          <div class="col align-self-center">
+            <div class="text-center">
+                <input class="text-center" type="text" id="name_input" placeholder="Asset Name" size="15">
+                <hr style="visibility:hidden;" />
+                <input class="text-center" type="text" id="description_input" placeholder="Asset Description" size="15">
+                <hr style="visibility:hidden;" />
+                <input type="file" id="img_input" src="#" size="15">
+                <hr style="visibility:hidden;" />
+                <button type="button" class="btn btn-primary" id="mint">MINT ASSET</button>
+            </div>
+          </div>
+
+          <div class="col align-self-center" >
+            <div class="text-center">
+              <p> <p>
+              <button type="button align-top" class="btn btn-warning" id="approve">Approve</button>
+            </div>
+          </div>  
+            
+          <div class="col align-self-center">
+            <div class="text-center">
+              <input class="text-center" type="text" id="Gwei" placeholder="Amt of Gwei" size="15">
+              <hr style="visibility:hidden;" />
+              <input class="text-center" type="text" id="TokenIdset" placeholder="Token ID" size="15">
+              <hr style="visibility:hidden;" />
+              <button type="button" class="btn btn-success" id="SetOffer">Set Offer</button>
+            </div>
+          </div>
+        </div>
+
+    <br>
+    <br>
+
+      <div class="row align-items-start">
+          <div class="col align-self-center"></div>
+          <div class="col align-self-center"> 
+            <div class="text-center">
+            <h3> Optional Additional Step </h3>
+            <p> Remove Offer for Asset </p>
+              <input class="text-center" type="text" id="TokenIdremove" placeholder="Token ID" size="15">
+              <hr style="visibility:hidden;" />
+              <button type="button" class="btn btn-danger" id="RemoveOffer">Remove Offer</button>
+            </div>
+          </div>
+          <div class="col align-self-center"></div>
+      </div>
+    </div>
     </body>
 </html>
