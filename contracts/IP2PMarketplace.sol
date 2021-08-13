@@ -62,4 +62,6 @@ interface IP2PMarketplace {
     function returnAsset(uint256 _tokenId) external;
 
     function Withdraw(uint256 amountToTransfer) external;
+
+    function getTokenGWEI(uint256 tokenId) external returns(uint256 price);
 }

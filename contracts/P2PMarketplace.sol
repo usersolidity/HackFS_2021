@@ -55,13 +55,13 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
         uint256 tokenId, 
         bool activeOffering,
         bool activelyBorrowed){
-        require(tokenIdToOffer[_tokenId].activeOffering, "No active offering for that Asset");
+        require(offers[_tokenId].activeOffering == true, "No active offering for that Asset");
             return (
-                tokenIdToOffer[_tokenId].lender,
-                tokenIdToOffer[_tokenId].GWEIPerPeriod,
-                tokenIdToOffer[_tokenId].tokenId,
-                tokenIdToOffer[_tokenId].activeOffering,
-                tokenIdToOffer[_tokenId].activelyBorrowed);
+                offers[_tokenId].lender,
+                offers[_tokenId].GWEIPerPeriod,
+                offers[_tokenId].tokenId,
+                offers[_tokenId].activeOffering,
+                offers[_tokenId].activelyBorrowed);
         }
 
     /**
@@ -74,7 +74,7 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
         uint256[] memory _offers;
 
         for(uint i=0; i<_length; i++){
-            if(offers[i].activeOffering && offers[i].activelyBorrowed == false){
+            if(offers[i].activeOffering == true && offers[i].activelyBorrowed == false){
                 if(_offers.length == 0){
                     _offers[0] = offers[i].tokenId;
                 }
@@ -82,6 +82,10 @@ contract P2PMarketplace is Ownable, IP2PMarketplace{
             }
         }
         return _offers;
+    }
+
+    function getTokenGWEI(uint256 tokenId) external view override returns(uint256 price){
+        return offers[tokenId].GWEIPerPeriod;
     }
 
     /*
