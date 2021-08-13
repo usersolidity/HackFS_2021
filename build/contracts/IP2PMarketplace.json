@@ -160,9 +160,28 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getTokenGWEI",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"TxType\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"MarketTransaction\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountToTransfer\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllTokenOnOffer\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"listOfOffers\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"getOffer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"dollarsPerPeriod\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"activeOffering\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"activelyBorrowed\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"lendAsset\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"removeOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"returnAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_AssetContractAddress\",\"type\":\"address\"}],\"name\":\"setAssetContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_dollarsPerPeriod\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"setOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getAllTokenOnOffer()\":{\"notice\":\"Get all tokenId's that are currently for sale. Returns an empty arror if none exist.\"},\"getOffer(uint256)\":{\"notice\":\"Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.\"},\"lendAsset(uint256)\":{\"notice\":\"Executes the purchase of _tokenId. Sends the funds to the seller and transfers the token using transferFrom in P2Pcontract. Emits the MarketTransaction event with txType \\\"Buy\\\". Requirement: The msg.value needs to equal the price of _tokenId Requirement: There must be an active offer for _tokenId\"},\"removeOffer(uint256)\":{\"notice\":\"Removes an existing offer. Emits the MarketTransaction event with txType \\\"Remove offer\\\" Requirement: Only the seller of _tokenId can remove an offer.\"},\"setAssetContract(address)\":{\"notice\":\"Set the current P2PContract address and initialize the instance of P2Pcontract. Requirement: Only the contract owner can call.\"},\"setOffer(uint256,uint256)\":{\"notice\":\"Creates a new offer for _tokenId for the price _price. Emits the MarketTransaction event with txType \\\"Create offer\\\" Requirement: Only the owner of _tokenId can create an offer. Requirement: There can only be one active offer for a token at a time. Requirement: Marketplace contract (this) needs to be an approved operator when the offer is created.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/IP2PMarketplace.sol\":\"IP2PMarketplace\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/IP2PMarketplace.sol\":{\"keccak256\":\"0x375f27df50a2d2fafbdf659c0b2117fd466f42dfc81385700c1e715d5edaa10a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6a2265444b3e55a40812c6cfd046932f6af572e6633336664c39832d62f71a10\",\"dweb:/ipfs/QmQ5zZXEvK8V845V9sViNDpXUcRghUbF5Vs3Sp5pR8VZ4H\"]},\"/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/Ownable.sol\":{\"keccak256\":\"0xd639167f705f62bc8c1c64f88114766738f4c9c1a9f1b29432fa8758899dcd37\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://23a6339ec8f38ffa419ec396df23264d5baeb29d5674047abe641f319e61df8e\",\"dweb:/ipfs/QmZTiMkNaquHBLyny3pDLHiUBWJnMVRNRKmA1GLBB9nR3R\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"TxType\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"MarketTransaction\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amountToTransfer\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllTokenOnOffer\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"listOfOffers\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"getOffer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"lender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"dollarsPerPeriod\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"activeOffering\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"activelyBorrowed\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getTokenGWEI\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"lendAsset\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"removeOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"returnAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_AssetContractAddress\",\"type\":\"address\"}],\"name\":\"setAssetContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_dollarsPerPeriod\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"setOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getAllTokenOnOffer()\":{\"notice\":\"Get all tokenId's that are currently for sale. Returns an empty arror if none exist.\"},\"getOffer(uint256)\":{\"notice\":\"Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.\"},\"lendAsset(uint256)\":{\"notice\":\"Executes the purchase of _tokenId. Sends the funds to the seller and transfers the token using transferFrom in P2Pcontract. Emits the MarketTransaction event with txType \\\"Buy\\\". Requirement: The msg.value needs to equal the price of _tokenId Requirement: There must be an active offer for _tokenId\"},\"removeOffer(uint256)\":{\"notice\":\"Removes an existing offer. Emits the MarketTransaction event with txType \\\"Remove offer\\\" Requirement: Only the seller of _tokenId can remove an offer.\"},\"setAssetContract(address)\":{\"notice\":\"Set the current P2PContract address and initialize the instance of P2Pcontract. Requirement: Only the contract owner can call.\"},\"setOffer(uint256,uint256)\":{\"notice\":\"Creates a new offer for _tokenId for the price _price. Emits the MarketTransaction event with txType \\\"Create offer\\\" Requirement: Only the owner of _tokenId can create an offer. Requirement: There can only be one active offer for a token at a time. Requirement: Marketplace contract (this) needs to be an approved operator when the offer is created.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/IP2PMarketplace.sol\":\"IP2PMarketplace\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/IP2PMarketplace.sol\":{\"keccak256\":\"0xdf50d57d28aa16b3cfb1b9c2ff3b530cd6d855d5061744288a022d76d2afad6b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://634d3b9e4724e2875786ffdc04bc92bca4b03e5656900e1a70cbd04a34af8135\",\"dweb:/ipfs/QmTGnqGmUVTdGpWa9UA1VvJ1xsGbfFD9G9LK77yQ8Sukie\"]},\"/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/Ownable.sol\":{\"keccak256\":\"0xd639167f705f62bc8c1c64f88114766738f4c9c1a9f1b29432fa8758899dcd37\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://23a6339ec8f38ffa419ec396df23264d5baeb29d5674047abe641f319e61df8e\",\"dweb:/ipfs/QmZTiMkNaquHBLyny3pDLHiUBWJnMVRNRKmA1GLBB9nR3R\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -170,19 +189,19 @@
   "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "//SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nimport \"./Ownable.sol\";\r\n\r\n/*\r\n * Market place to trade kitties (should **in theory** be used for any ERC721 token)\r\n * It needs an existing P2P contract to interact with\r\n * Note: it does not inherit from the P2P contracts\r\n * Note: The contract needs to be an operator for everyone who is selling through this contract.\r\n */\r\ninterface IP2PMarketplace {\r\n\r\n    event MarketTransaction(string TxType, address owner, uint256 tokenId);\r\n\r\n    /**\r\n    * Set the current P2PContract address and initialize the instance of P2Pcontract.\r\n    * Requirement: Only the contract owner can call.\r\n     */\r\n    function setAssetContract(address _AssetContractAddress) external;\r\n\r\n    /**\r\n    * Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.\r\n     */\r\n    function getOffer(uint256 _tokenId) external view returns ( \r\n        address lender, \r\n        uint256 dollarsPerPeriod, \r\n        uint256 tokenId, \r\n        bool activeOffering,\r\n        bool activelyBorrowed);\r\n\r\n    /**\r\n    * Get all tokenId's that are currently for sale. Returns an empty arror if none exist.\r\n     */\r\n    function getAllTokenOnOffer() external view  returns(uint256[] memory listOfOffers);\r\n\r\n    /**\r\n    * Creates a new offer for _tokenId for the price _price.\r\n    * Emits the MarketTransaction event with txType \"Create offer\"\r\n    * Requirement: Only the owner of _tokenId can create an offer.\r\n    * Requirement: There can only be one active offer for a token at a time.\r\n    * Requirement: Marketplace contract (this) needs to be an approved operator when the offer is created.\r\n     */\r\n    function setOffer(uint256 _dollarsPerPeriod, uint256 _tokenId) external;\r\n\r\n    /**\r\n    * Removes an existing offer.\r\n    * Emits the MarketTransaction event with txType \"Remove offer\"\r\n    * Requirement: Only the seller of _tokenId can remove an offer.\r\n     */\r\n    function removeOffer(uint256 _tokenId) external;\r\n\r\n    /**\r\n    * Executes the purchase of _tokenId.\r\n    * Sends the funds to the seller and transfers the token using transferFrom in P2Pcontract.\r\n    * Emits the MarketTransaction event with txType \"Buy\".\r\n    * Requirement: The msg.value needs to equal the price of _tokenId\r\n    * Requirement: There must be an active offer for _tokenId\r\n     */\r\n    function lendAsset(uint256 _tokenId) external payable;\r\n\r\n    function returnAsset(uint256 _tokenId) external;\r\n\r\n    function Withdraw(uint256 amountToTransfer) external;\r\n}\r\n",
+  "source": "//SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nimport \"./Ownable.sol\";\r\n\r\n/*\r\n * Market place to trade kitties (should **in theory** be used for any ERC721 token)\r\n * It needs an existing P2P contract to interact with\r\n * Note: it does not inherit from the P2P contracts\r\n * Note: The contract needs to be an operator for everyone who is selling through this contract.\r\n */\r\ninterface IP2PMarketplace {\r\n\r\n    event MarketTransaction(string TxType, address owner, uint256 tokenId);\r\n\r\n    /**\r\n    * Set the current P2PContract address and initialize the instance of P2Pcontract.\r\n    * Requirement: Only the contract owner can call.\r\n     */\r\n    function setAssetContract(address _AssetContractAddress) external;\r\n\r\n    /**\r\n    * Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.\r\n     */\r\n    function getOffer(uint256 _tokenId) external view returns ( \r\n        address lender, \r\n        uint256 dollarsPerPeriod, \r\n        uint256 tokenId, \r\n        bool activeOffering,\r\n        bool activelyBorrowed);\r\n\r\n    /**\r\n    * Get all tokenId's that are currently for sale. Returns an empty arror if none exist.\r\n     */\r\n    function getAllTokenOnOffer() external view  returns(uint256[] memory listOfOffers);\r\n\r\n    /**\r\n    * Creates a new offer for _tokenId for the price _price.\r\n    * Emits the MarketTransaction event with txType \"Create offer\"\r\n    * Requirement: Only the owner of _tokenId can create an offer.\r\n    * Requirement: There can only be one active offer for a token at a time.\r\n    * Requirement: Marketplace contract (this) needs to be an approved operator when the offer is created.\r\n     */\r\n    function setOffer(uint256 _dollarsPerPeriod, uint256 _tokenId) external;\r\n\r\n    /**\r\n    * Removes an existing offer.\r\n    * Emits the MarketTransaction event with txType \"Remove offer\"\r\n    * Requirement: Only the seller of _tokenId can remove an offer.\r\n     */\r\n    function removeOffer(uint256 _tokenId) external;\r\n\r\n    /**\r\n    * Executes the purchase of _tokenId.\r\n    * Sends the funds to the seller and transfers the token using transferFrom in P2Pcontract.\r\n    * Emits the MarketTransaction event with txType \"Buy\".\r\n    * Requirement: The msg.value needs to equal the price of _tokenId\r\n    * Requirement: There must be an active offer for _tokenId\r\n     */\r\n    function lendAsset(uint256 _tokenId) external payable;\r\n\r\n    function returnAsset(uint256 _tokenId) external;\r\n\r\n    function Withdraw(uint256 amountToTransfer) external;\r\n\r\n    function getTokenGWEI(uint256 tokenId) external returns(uint256 price);\r\n}\r\n",
   "sourcePath": "/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/IP2PMarketplace.sol",
   "ast": {
     "absolutePath": "/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/IP2PMarketplace.sol",
     "exportedSymbols": {
       "IP2PMarketplace": [
-        1020
+        1027
       ],
       "Ownable": [
-        1078
+        1052
       ]
     },
-    "id": 1021,
+    "id": 1028,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -202,8 +221,8 @@
         "file": "./Ownable.sol",
         "id": 952,
         "nodeType": "ImportDirective",
-        "scope": 1021,
-        "sourceUnit": 1079,
+        "scope": 1028,
+        "sourceUnit": 1053,
         "src": "59:23:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -214,9 +233,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1020,
+        "id": 1027,
         "linearizedBaseContracts": [
-          1020
+          1027
         ],
         "name": "IP2PMarketplace",
         "nodeType": "ContractDefinition",
@@ -371,7 +390,7 @@
               "parameters": [],
               "src": "725:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "660:66:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -562,7 +581,7 @@
               ],
               "src": "919:153:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "861:212:4",
             "stateMutability": "view",
             "virtual": false,
@@ -630,7 +649,7 @@
               ],
               "src": "1243:31:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "1191:84:4",
             "stateMutability": "view",
             "virtual": false,
@@ -715,7 +734,7 @@
               "parameters": [],
               "src": "1756:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "1685:72:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -774,7 +793,7 @@
               "parameters": [],
               "src": "2001:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "1954:48:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -833,7 +852,7 @@
               "parameters": [],
               "src": "2413:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "2360:54:4",
             "stateMutability": "payable",
             "virtual": false,
@@ -886,7 +905,7 @@
               "parameters": [],
               "src": "2469:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "2422:48:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -939,30 +958,110 @@
               "parameters": [],
               "src": "2530:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "2478:53:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "a37f8a5c",
+            "id": 1026,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getTokenGWEI",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1022,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1021,
+                  "mutability": "mutable",
+                  "name": "tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1026,
+                  "src": "2561:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1020,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2561:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2560:17:4"
+            },
+            "returnParameters": {
+              "id": 1025,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1024,
+                  "mutability": "mutable",
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1026,
+                  "src": "2595:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1023,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2595:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2594:15:4"
+            },
+            "scope": 1027,
+            "src": "2539:71:4",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1021,
-        "src": "387:2147:4"
+        "scope": 1028,
+        "src": "387:2226:4"
       }
     ],
-    "src": "32:2504:4"
+    "src": "32:2583:4"
   },
   "legacyAST": {
     "absolutePath": "/Users/Kaiju/Desktop/Courses/HackFS/HackFS_2021/contracts/IP2PMarketplace.sol",
     "exportedSymbols": {
       "IP2PMarketplace": [
-        1020
+        1027
       ],
       "Ownable": [
-        1078
+        1052
       ]
     },
-    "id": 1021,
+    "id": 1028,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -982,8 +1081,8 @@
         "file": "./Ownable.sol",
         "id": 952,
         "nodeType": "ImportDirective",
-        "scope": 1021,
-        "sourceUnit": 1079,
+        "scope": 1028,
+        "sourceUnit": 1053,
         "src": "59:23:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -994,9 +1093,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1020,
+        "id": 1027,
         "linearizedBaseContracts": [
-          1020
+          1027
         ],
         "name": "IP2PMarketplace",
         "nodeType": "ContractDefinition",
@@ -1151,7 +1250,7 @@
               "parameters": [],
               "src": "725:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "660:66:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1342,7 +1441,7 @@
               ],
               "src": "919:153:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "861:212:4",
             "stateMutability": "view",
             "virtual": false,
@@ -1410,7 +1509,7 @@
               ],
               "src": "1243:31:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "1191:84:4",
             "stateMutability": "view",
             "virtual": false,
@@ -1495,7 +1594,7 @@
               "parameters": [],
               "src": "1756:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "1685:72:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1554,7 +1653,7 @@
               "parameters": [],
               "src": "2001:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "1954:48:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1613,7 +1712,7 @@
               "parameters": [],
               "src": "2413:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "2360:54:4",
             "stateMutability": "payable",
             "virtual": false,
@@ -1666,7 +1765,7 @@
               "parameters": [],
               "src": "2469:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "2422:48:4",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1719,18 +1818,98 @@
               "parameters": [],
               "src": "2530:0:4"
             },
-            "scope": 1020,
+            "scope": 1027,
             "src": "2478:53:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "a37f8a5c",
+            "id": 1026,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getTokenGWEI",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1022,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1021,
+                  "mutability": "mutable",
+                  "name": "tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1026,
+                  "src": "2561:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1020,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2561:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2560:17:4"
+            },
+            "returnParameters": {
+              "id": 1025,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1024,
+                  "mutability": "mutable",
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1026,
+                  "src": "2595:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1023,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2595:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2594:15:4"
+            },
+            "scope": 1027,
+            "src": "2539:71:4",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1021,
-        "src": "387:2147:4"
+        "scope": 1028,
+        "src": "387:2226:4"
       }
     ],
-    "src": "32:2504:4"
+    "src": "32:2583:4"
   },
   "compiler": {
     "name": "solc",
@@ -1738,7 +1917,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-08-12T14:49:09.661Z",
+  "updatedAt": "2021-08-13T21:21:59.500Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
