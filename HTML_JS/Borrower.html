@@ -5,10 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
         <title>P2P Marketplace</title>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-          crossorigin="anonymous"></script>
-        <script type="text/javascript" src="./web3.min.js"></script>
+        <script
+			  src="https://code.jquery.com/jquery-3.6.0.js"
+			  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			  crossorigin="anonymous"></script>
+          <script src="https://unpkg.com/@metamask/legacy-web3@latest/dist/metamask.web3.min.js"></script>
+          <script type="text/javascript" src="./web3.min.js"></script>
         <script type="text/javascript" src="./abiAsset.js"></script> <!--abi.js import-->
         <script type="text/javascript" src="./abiP2P.js"></script>
         <script type="javascript" src="./nftStorage.js"></script> <!--nftstorage.js import-->
@@ -47,6 +49,14 @@
       <div class="text-center"><h1>Borrow An Asset</h1></div>
       <div class="container">
         <div class="row align-items-start">
+
+          <div class="col align-self-center" >
+              <div class="text-center">
+                  <hr style="visibility:hidden;" />
+                  <button type="button" class="btn btn-info" id="GetOffers">Asset Offers</button>
+              </div>
+          </div>  
+
             <div class="col align-self-center" >
                 <div class="text-center">
                     <input class="text-center" type="text" id="TokenIdborrow" placeholder="Token ID" size="15">

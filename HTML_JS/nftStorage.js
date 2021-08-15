@@ -1,31 +1,38 @@
 
 // import { NFTStorage, File } from 'nft.storage'
 const NFTStorage = require('nft.storage')
-const NFTSTORAGE_API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEJFNjAzNjYxMzk2OTg5Rjk5YUU4MURGNzRGY2NFRDQ4YUFGMkYyOGEiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYyODE5MjE3ODUzMCwibmFtZSI6IkhhY2tGU18yMDIxIn0.8egYuYRc_nmWS-HyEbSYliB2ShACUq2TWEswzcnoOVI'
-const nftClient = new NFTStorage.NFTStorage({ token: NFTSTORAGE_API_TOKEN });
+const nftClient = new NFTStorage.NFTStorage({ token: secrets.NFTSTORAGE_API_TOKEN });
 const Web3 = require('web3');
+ 
+// If the browser has injected Web3.js
+if (window.web3) {
+  // Then backup the good old injected Web3, sometimes it's usefull:
+  window.web3old = window.web3;
+  // And replace the old injected version by the latest build of Web3.js version 1.0.0
+  window.web3 = new Web3(window.web3.givenProvider);
+}
 
-var web3 = new Web3(Web3.givenProvider);
 var AssetInstance;
 var ContractInstance;
 
-$(function () {
+$(document).ready(function(){
   window.ethereum.enable().then(function (accounts) {    //launches metamask to ask for connecting account
     //Contract(abi (create .js file to import),address(get from console migrate "string format"), from{account[0]})
     // The address supplied is the contract this will interact with
-    AssetInstance = new web3.eth.Contract(abiAsset, "0x9E5D45f830625F269F01b74B326d9f6c641b1946", { from: accounts[0] });
-    MarketInstance = new web3.eth.Contract(abiP2P, "0xeC563222B0b2F61177b0f65493BF4CE725F6E23b", { from: accounts[0] });
+    AssetInstance = new window.web3.eth.contract(abiAsset, "0x9E5D45f830625F269F01b74B326d9f6c641b1946", { from: accounts[0] });
+    MarketInstance = new window.web3.eth.contract(abiP2P, "0xeC563222B0b2F61177b0f65493BF4CE725F6E23b", { from: accounts[0] });
     const MarketConractAddress = 0xd44Ae8f59F640f25690E7Ff63e3F2d9429aD4cB5;
 
-    $("#mint").onclick(mint);
-    $("#approve").onclick(ApproveMarketplace);
-    $("#SetOffer").onclick(SetOffer);
-    $("#RemoveOffer").onclick(RemoveOffer);
-    //GetOffers
-    $("#LendAsset").onclick(LendAsset);
-    $("#ReturnAsset").onclick(ReturnAsset);
+    $("#mint").on("click",mint);
+    $("#approve").on("click",ApproveMarketplace);
+    $("#SetOffer").on("click",SetOffer);
+    $("#RemoveOffer").on("click",RemoveOffer);
+    $("#GetOffers").on("click", GetOffer);
+    $("#LendAsset").on("click",LendAsset);
+    $("#ReturnAsset").on("click",ReturnAsset);
 
-    async function mint() {
+   function mint() {
+      console.log("working")
       var metadataURI = await client.store({
         name: $("#name_input"),
         description: $("#description_input"),
@@ -70,6 +77,12 @@ $(function () {
     //Create function call returnAsset (MarketInstance)
     function ReturnAsset(){
       MarketInstance.methods.returnAsset($("tokenIdreturn"));
+    }
+
+    //Create function call returnAsset (MarketInstance)
+    function GetOffer(){
+      var offers = MarketInstance.methods.getAllTokenOnOffer();
+      console.log(offers);
     }
 
     //Event that logs the creation of an Asset by Asset Contract
