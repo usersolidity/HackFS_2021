@@ -1,9 +1,17 @@
 # HackFS_2021
 A P2P marketplace that uses ERC-721 Token standards 
 
+Deploy instructions
+1) `npm install`
+2) Quick start ganache
+3) `truffle compile`
+4) `truffle migrate` to deploy contracts to local blockchain
+5) `cd HTML_JS`
+6) `python3 —m http.server` to run website locally
+
 Steps to Use
 Create a token for Lending
-1) Deploy AssetContract.sol and P2PMarketplace.sol
+1) Deploy AssetContract.sol and P2PMarketplace.sol with the command
 2) Call function setAssetContract in P2PMarketplace.sol sending in address of deployed AssetContract.sol
 3) Mint NFT.storage
 4) Call AssetContract function createAsset sending in url of nft as variable. Will return a tokenId number
